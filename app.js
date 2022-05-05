@@ -27,10 +27,7 @@ var io = require( 'socket.io' )( http );
 var s2t_params = {
   objectMode: true,
   contentType: 'audio/mp3',
-  //contentType: 'audio/l16; rate=44000',
   model: settings.s2t_model,
-  //keywords: [],
-  //keywordsThreshold: 0.5,
   smartFormatting: true,
   speakerLabels: true,
   inactivityTimeout: -1,
@@ -75,34 +72,6 @@ app.post( '/voice', function( req, res ){
     res.write( JSON.stringify( { status: false, error: err }, 2, null ) );
     res.end();
   })
-});
-
-app.post( '/audio', function( req, res ){
-  res.contentType( 'application/json; charset=utf-8' );
-
-  var voicefile = req.file.path;
-  var filename = req.file.originalname;
-  var uuid = req.body.uuid;
-
-  //. public フォルダへリネーム＆移動してから処理する
-  fs.rename( voicefile, './public/' + filename, function( err ){
-    if( err ){
-      console.log( err );
-      res.status( 400 );
-      res.write( JSON.stringify( { status: false, error: err }, 2, null ) );
-      res.end();
-    }else{
-      processAudioFile( './public/' + filename, uuid ).then( function( result ){
-        res.write( JSON.stringify( { status: true }, 2, null ) );
-        res.end();
-      }).catch( function( err ){
-        console.log( err );
-        res.status( 400 );
-        res.write( JSON.stringify( { status: false, error: err }, 2, null ) );
-        res.end();
-      })
-    }
-  });
 });
 
 app.post( '/setcookie', function( req, res ){

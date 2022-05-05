@@ -124,16 +124,6 @@ html, body{
     <td>
       <input type="button" class="btn btn-xs btn-primary" id="post_btn" value="POST" onClick="postAudio();"/>
     </td>
-    <!--
-    <td>
-      <form name="frm1" id="frm1" enctype="multipart/mixed">
-      <input type="file" id="voice" name="voice"/>
-      </form>
-    </td>
-    <td>
-      <input type="button" class="btn btn-xs btn-success" id="upload_btn" value="UPLOAD" onClick="uploadAudio();"/>
-    </td>
-    -->
   </tr>
 </table>
 </div>
@@ -303,33 +293,6 @@ function postAudio(){
       console.log( textStatus + ': ' + errorThrown );
     }
   });
-}
-
-function uploadAudio(){
-  idx = -1;
-  idxtexts = [];
-  idxballooned = {};
-
-  var form = $('#frm1').get()[0];
-  var formData = new FormData( form );
-  formData.append( 'timestamp', ( new Date() ).getTime() );
-  formData.append( 'uuid', uuid );
-  $.ajax({
-    type: 'POST',
-    url: '/audio',
-    data: formData,
-    contentType: false,
-    processData: false,
-    success: function( data, dataType ){
-      //. 実際はずっと処理中になるので、しばらく結果はかえって来ない
-      console.log( data );
-    },
-    error: function( jqXHR, textStatus, errorThrown ){
-      console.log( textStatus + ': ' + errorThrown );
-    }
-  });
-
-  return false;
 }
 
 function myReplace( text, src, dst ){
