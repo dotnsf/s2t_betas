@@ -1,0 +1,6 @@
+.memo.txt
+settings.js.*
+*.mp3
+node_modules/
+package-lock.json
+!.gitkeep
