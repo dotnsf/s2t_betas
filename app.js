@@ -124,7 +124,6 @@ async function processAudioFile( filepath, uuid, deleteFileWhenFinished ){
         text = text.split( ' ' ).join( '' );
         //console.log( 'text = ' + text );
       }else if( evt.speaker_labels && evt.speaker_labels[0] && evt.speaker_labels[0].from ){
-        console.log( JSON.stringify( evt ) );
         /* スピーカーラベル
         {
           speaker_labels: [
